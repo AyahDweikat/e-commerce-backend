@@ -34,20 +34,12 @@ export const generalFeilds = {
 
 const validation = (schema)=>{
     return (req,res,next)=>{
-        const valiadtionArray = [];
-        dataMethods.forEach(key=>{
-            if(schema[key]){
-               const validationResult = schema[key].validate(req[key],{abortEarly:false});
-
-               if(validationResult.error){
-                valiadtionArray.push(validationResult.error.details);
-               }
-            }
-        } )
-        if(valiadtionArray.length >0){
-            return res.json({message:"valiation error",valiadtionArray});
+        const inputsData = {...req.body, ...req.query, ...req.params, file:req.file }
+        const validationResult = schema.validate(inputsData, {abortEarly:false})
+        
+        if(validationResult?.error?.details.length){
+            return res.json({message:"valiation error",valiadtionArray: validationResult?.error?.details});
         }return next();
+    }
 }
-}
-
 export default validation;
