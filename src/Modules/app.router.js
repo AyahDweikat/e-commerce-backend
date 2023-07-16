@@ -5,6 +5,7 @@ import UserRouter from './User/User.router.js';
 import path from 'path'; 
 import {fileURLToPath} from 'url';
 import CategoryRouter from './Category/Category.router.js';
+import brandRouter from './Brand/brand.router.js';
 import subCategoryRouter from './SubCategory/SubCategory.router.js'
 import couponRouter from './Coupon/coupon.router.js'
 
@@ -21,6 +22,8 @@ const initApp=(app,express)=>{
     app.use('/category', CategoryRouter)
     app.use('/subCategory', subCategoryRouter)
     app.use('/coupon', couponRouter)
+    app.use('/brand', brandRouter)
+
 
 
 

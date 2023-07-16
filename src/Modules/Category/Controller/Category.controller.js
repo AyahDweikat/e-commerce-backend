@@ -28,7 +28,7 @@ export const updateCategory = async(req, res, next)=>{
         category.image = {public_id, secure_url}
     }
     await category.save()
-    return res.json({message:"Categoryupdated successfully", category})
+    return res.json({message:"Category updated successfully", category})
 }
 
 
