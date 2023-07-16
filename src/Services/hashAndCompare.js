@@ -1,18 +1,13 @@
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 
-export const hash =(plainText,saltRound=process.env.SALTROUND)=>{
+export const hash = (plainText, saltRound = process.env.SALTROUND) => {
+  const hashResult = bcrypt.hashSync(plainText, parseInt(saltRound));
 
-    const hashResult = bcrypt.hashSync(plainText,parseInt(saltRound));
+  return hashResult;
+};
 
-    return hashResult
-}
+export const compare = (password, hashValue) => {
+  const hashResult = bcrypt.compareSync(password, hashValue);
 
-
-
-export const compare =(password,hashValue)=>{
-
-    const hashResult = bcrypt.compareSync(password,hashValue);
-
-    return hashResult;
-}
-
+  return hashResult;
+};

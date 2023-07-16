@@ -16,6 +16,8 @@ const initApp=(app,express)=>{
     app.use("/auth", AuthRouter);
     app.use('/user', UserRouter);
     app.use('/category', CategoryRouter)
+
+
     app.use('/*', (req,res)=>{
         return res.json({messaga:"page not found"});
     })

@@ -1,7 +1,7 @@
 import joi from "joi";
 import { generalFeilds } from "../../Middleware/validation.js";
 
-export const addCategorySchema = 
+export const addSubCategorySchema = 
 joi.object({
     name: joi.string().min(2).max(20).required(),
     file: generalFeilds.file.required()
@@ -9,7 +9,7 @@ joi.object({
 
 
 
-export const updateCategorySchema = 
+export const updateSubCategorySchema = 
 joi.object({
     categoryId:generalFeilds.id,
     name: joi.string().min(2).max(20),
@@ -17,7 +17,7 @@ joi.object({
 }).required()
 
 
-export const getCategorySchema = 
+export const getSubCategorySchema = 
 joi.object({
     categoryId:generalFeilds.id
 }).required()

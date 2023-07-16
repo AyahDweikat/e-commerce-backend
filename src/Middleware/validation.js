@@ -1,21 +1,14 @@
-
 import joi from 'joi'
-
+import { Types } from 'mongoose';
 const dataMethods = ['body','query','params','headers','file'];
-
 const validationObjectId =(value,helper)=>{
-
     if(Types.ObjectId.isValid(value)){
         return true 
     }else {
-
-        return helper.message("rteertertertertreterte")
-
+        return helper.message("id is invalid")
     }
 }
-
 export const generalFeilds = {
-
     email:joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
     password:joi.string().min(3).required(),
     file:joi.object({
@@ -29,12 +22,13 @@ export const generalFeilds = {
         size:joi.number().positive().required(),
         dest:joi.string(),
     }),
-    id:joi.string().custom(validationObjectId).min(24).max(24).required(),
+    id:joi.string().custom(validationObjectId).required(),
 }
 
 const validation = (schema)=>{
     return (req,res,next)=>{
-        const inputsData = {...req.body, ...req.query, ...req.params, file:req.file }
+        const inputsData = {...req.body, ...req.query, ...req.params }
+        if(req.file) inputsData = {...inputsData, file:req.file }
         const validationResult = schema.validate(inputsData, {abortEarly:false})
         
         if(validationResult?.error?.details.length){
