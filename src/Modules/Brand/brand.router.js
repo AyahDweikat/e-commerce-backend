@@ -1,9 +1,6 @@
 import { Router } from "express";
-
 import * as BrandController from "./Controller/brand.controller.js";
-
 import * as validators from "./brand.validation.js";
-
 import SubCategoryRouter from "../SubCategory/SubCategory.router.js";
 import fileUpload, { fileValidation } from "../../Services/multerCloudinary.js";
 import { asyncHandler } from "../../Services/errorHandling.js";
@@ -17,12 +14,6 @@ router.post(
   validation(validators.addBrandSchema),
   asyncHandler(BrandController.addBrand)
 );
-// router.put(
-//   "/updateBrand/:brandId",
-//   fileUpload(fileValidation.image).single("image"),
-//   validation(validators.updateBrandSchema),
-//   asyncHandler(BrandController.updateBrand)
-// );
 router.get(
   "/getBrand/:brandId",
   validation(validators.getBrandSchema),
@@ -30,4 +21,10 @@ router.get(
 );
 router.get("/getBrands/:categoryId", asyncHandler(BrandController.getBrands));
 router.get("/getAllBrands", asyncHandler(BrandController.getAllBrands));
+// router.put(
+//   "/updateBrand/:brandId",
+//   fileUpload(fileValidation.image).single("image"),
+//   validation(validators.updateBrandSchema),
+//   asyncHandler(BrandController.updateBrand)
+// );
 export default router;

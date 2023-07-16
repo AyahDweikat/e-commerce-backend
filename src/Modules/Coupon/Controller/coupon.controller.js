@@ -1,7 +1,4 @@
-
 import couponModel from './../../../../DB/model/Coupon.model.js';
-
-
 export const addCoupon = async(req, res, next)=>{
     if(await couponModel.findOne({name: req.body.name})){
         return next(new Error(`Duplicate Coupon name ${req.body.name}`, {cause:409}))
@@ -21,7 +18,6 @@ export const updateCoupon = async(req, res)=>{
         if(coupon.amount === req.body.amount) return next(new Error(`Old amount match new amount`, {cause:409}))
         coupon.amount = req.body.amount;
     }
-
     await coupon.save()
     return res.json({message:"Categoryupdated successfully", coupon})
 }

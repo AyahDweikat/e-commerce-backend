@@ -19,8 +19,13 @@ router.put(
   validation(validators.updateSubCategorySchema),
   asyncHandler(SubCategoryController.updateSubCategory)
 );
-router.get('/getSubCategory', asyncHandler(SubCategoryController.getSubCategory))
-router.get('/getAllSubCategories', asyncHandler(SubCategoryController.getAllSubCategories))
-
+router.get(
+  "/getSubCategory",
+  asyncHandler(SubCategoryController.getSubCategory)
+);
+router.get(
+  "/getAllSubCategories",
+  asyncHandler(SubCategoryController.getAllSubCategories)
+);
 
 export default router;

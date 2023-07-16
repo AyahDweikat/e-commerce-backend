@@ -12,7 +12,11 @@ router.post(
   asyncHandler(CouponController.addCoupon)
 );
 router.get("/getCoupons", asyncHandler(CouponController.getCoupons));
-router.get("/getCouponData/:couponId", validation(validators.getCouponSchema), asyncHandler(CouponController.getCouponData));
+router.get(
+  "/getCouponData/:couponId",
+  validation(validators.getCouponSchema),
+  asyncHandler(CouponController.getCouponData)
+);
 
 router.put(
   "/updateCoupon/:couponId",
