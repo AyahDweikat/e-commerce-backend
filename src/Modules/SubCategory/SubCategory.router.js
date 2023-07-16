@@ -10,11 +10,17 @@ const router = Router({ mergeParams: true });
 router.post(
   "/addSubCategory",
   fileUpload(fileValidation.image).single("image"),
-  asyncHandler(SubCategoryController.addSubCategory)
+  validation(validators.addSubCategorySchema),
+  SubCategoryController.addSubCategory
 );
-// router.post('/addSubCategory', fileUpload(fileValidation.image).single('image'), validation(validators.addSubCategorySchema) ,asyncHandler(SubCategoryController.addSubCategory));
-// router.put('/updateSubCategory/:categoryId', fileUpload(fileValidation.image).single('image'), validation(validators.SubCategoryController) ,asyncHandler(CategoryController.updateCategory))
-// router.get('/getSubCategory/:categoryId', validation(validators.getCategorySchema), asyncHandler(SubCategoryController.getCategory))
-// router.get('/getAllSubCategories', asyncHandler(SubCategoryController.getAllCategories))
+router.put(
+  "/updateSubCategory/:subCategoryId",
+  fileUpload(fileValidation.image).single("image"),
+  validation(validators.updateSubCategorySchema),
+  asyncHandler(SubCategoryController.updateSubCategory)
+);
+router.get('/getSubCategory', asyncHandler(SubCategoryController.getSubCategory))
+router.get('/getAllSubCategories', asyncHandler(SubCategoryController.getAllSubCategories))
+
 
 export default router;

@@ -5,6 +5,7 @@ import UserRouter from './User/User.router.js';
 import path from 'path'; 
 import {fileURLToPath} from 'url';
 import CategoryRouter from './Category/Category.router.js';
+import subCategoryRouter from './SubCategory/SubCategory.router.js'
 import { globalErrorHandel } from '../Services/errorHandling.js';
  const __dirname = path.dirname(fileURLToPath(import.meta.url));
  const fullPath=path.join(__dirname,'../upload');
@@ -16,6 +17,8 @@ const initApp=(app,express)=>{
     app.use("/auth", AuthRouter);
     app.use('/user', UserRouter);
     app.use('/category', CategoryRouter)
+    app.use('/subCategory', subCategoryRouter)
+
 
 
     app.use('/*', (req,res)=>{

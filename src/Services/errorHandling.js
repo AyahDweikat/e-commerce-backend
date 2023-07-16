@@ -12,5 +12,5 @@ export const globalErrorHandel = (err, req, res, next) => {
       .status(err?.cause || 500)
       .json({ message: "catch error", error: err.stack });
   }
-  return res.status(err?.cause || 500).json({ message: "catch error" });
+  return res.status(err?.cause || 500).json({ message: "catch error", error: err.stack });
 };

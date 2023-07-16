@@ -20,12 +20,12 @@ export const updateCategory = async(req, res, next)=>{
         if(category.name === req.body.name) return next(new Error(`Old name match new name`, {cause:409}))
         if(await categoryModel.findOne({name:req.body.name})) return next(new Error(`Invalid Category name`, {cause:409}))
         category.name = req.body.name;
-        req.body.slug =slugify(req.body.name)
+        category.slug =slugify(req.body.name)
     }
     if(req.file){
         const {public_id, secure_url} = await cloudinary.uploader.upload(req.file.path, {folder:`${process.env.APP_NAME}/category`})
         await cloudinary.uploader.destroy(category.image.public_id)
-        req.body.image = {public_id, secure_url}
+        category.image = {public_id, secure_url}
     }
     await category.save()
     return res.json({message:"Categoryupdated successfully", category})
@@ -39,6 +39,6 @@ export const getCategory = async(req, res, next)=>{
 }
 
 export const getAllCategories = async(req, res)=>{
-    const categories =  await categoryModel.find()
+    const categories =  await categoryModel.find().populate('subCategories')
     return res.status(200).json({message:"get all Categories", results: categories})
 }

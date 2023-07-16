@@ -27,7 +27,7 @@ export const generalFeilds = {
 
 const validation = (schema)=>{
     return (req,res,next)=>{
-        const inputsData = {...req.body, ...req.query, ...req.params }
+        let inputsData = {...req.body, ...req.query, ...req.params }
         if(req.file) inputsData = {...inputsData, file:req.file }
         const validationResult = schema.validate(inputsData, {abortEarly:false})
         
