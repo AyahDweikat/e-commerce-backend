@@ -5,8 +5,16 @@ import validation from '../../Middleware/validation.js';
 import * as validators from './Auth.validation.js';
 const router =Router();
 
-router.post('/signup',validation(validators.signupSchema),asyncHandler(AuthController.signup))
-router.post('/login',validation(validators.loginSchema),asyncHandler(AuthController.login))
-router.get('/confirmEmail/:token',AuthController.confirmEmail)
+router.post('/signup',
+validation(validators.signupSchema),
+asyncHandler(AuthController.signup))
+router.post('/login', validation(validators.loginSchema), asyncHandler(AuthController.login))
+router.get('/confirmEmail/:token', validation(validators.tokenSchema), AuthController.confirmEmail)
+router.get('/newConfirmEmail/:token', validation(validators.tokenSchema), AuthController.newConfirmEmail)
+
+
+router.patch('/sendCode', validation(validators.sendCodeSchema), asyncHandler(AuthController.sendCode))
+router.patch('/forgetPassword', validation(validators.forgetPasswordSchema), asyncHandler(AuthController.forgetPassword))
+
 
 export default router;

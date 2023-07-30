@@ -13,13 +13,13 @@ const fullPath=path.join(__dirname,'../upload');
 const initApp=(app,express)=>{
     connectDB();
     app.use(express.json());
-    app.use('/upload',express.static(fullPath));
-    app.use("/auth", AuthRouter);
-    app.use('/user', UserRouter);
     app.use('/category', CategoryRouter)
     app.use('/subCategory', subCategoryRouter)
     app.use('/coupon', couponRouter)
     app.use('/brand', brandRouter)
+    app.use('/upload',express.static(fullPath));
+    app.use("/auth", AuthRouter);
+    app.use('/user', UserRouter);
     app.use('/*', (req,res)=>{
         return res.json({messaga:"page not found"});
     })
