@@ -4,8 +4,6 @@ import { asyncHandler } from "../../../Services/errorHandling.js";
 import { compare, hash } from "../../../Services/hashAndCompare.js";
 
 export const profilePic =asyncHandler(async (req,res,next)=>{
-
-   
     if(!req.file){
         return next(new Error("please provide a file"));
     }
@@ -17,17 +15,11 @@ export const profilePic =asyncHandler(async (req,res,next)=>{
         await cloudinary.uploader.destroy(user.profolePublicUrl);
     }
     return res.json({message:"success",user});
-
 }) 
-
 export const coverPic =async (req,res,next)=>{
-
     if(!req.files){
         return next(new Error("please provide a file"));
-
-
     }
-
     const coverPic=[];
     for(const file of req.files){
         coverPic.push(`${file.dest}`)

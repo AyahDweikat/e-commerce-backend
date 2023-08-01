@@ -1,9 +1,6 @@
 import cloudinary from '../../../Services/cloudinary.js';
 import brandModel from './../../../../DB/model/Brand.model.js';
 import * as dotenv from 'dotenv';
-
-
-
 export const addBrand = async(req, res, next) =>{
     const {name, categoryId} = req.body;
     if(await brandModel.findOne({name})){
@@ -12,7 +9,6 @@ export const addBrand = async(req, res, next) =>{
     const {public_id, secure_url} = await cloudinary.uploader.upload(req.file.path, {folder:`${process.env.APP_NAME}/brand`})
     const newBrand = await brandModel.create({name, categoryId, image:{public_id, secure_url}, createdBy:{} })
     return res.status(201).json({message:"successfully added Category", newBrand})
-
 }
 export const getBrands = async(req, res, next) =>{
     const {categoryId} = req.params;

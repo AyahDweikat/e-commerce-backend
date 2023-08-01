@@ -4,7 +4,6 @@ export const roles = {
   Admin: "Admin",
   User: "User",
 };
-
 export const auth = (accessRoles = []) => {
   return async (req, res, next) => {
     const { authorization } = req.headers;

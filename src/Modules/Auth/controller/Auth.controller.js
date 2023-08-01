@@ -28,9 +28,18 @@ export const signup = async (req, res, next) => {
     password: hashPassword,
   });
   return res
-    .status(201)
-    .json({ message: "Done Registeration", user: createUser._id });
+    .status(201).json({ message: "Done Registeration", user: createUser._id });
 };
+
+
+
+
+
+
+
+
+
+
 export const confirmEmail = async (req, res) => {
   const { token } = req.params;
   const { email } = verifyToken(token, process.env.SIGNUP_TOKEN);
@@ -50,6 +59,12 @@ export const confirmEmail = async (req, res) => {
   );
   return res.status(200).redirect(`${process.env.FE_URL}`);
 };
+
+
+
+
+
+
 export const newConfirmEmail = async (req, res) => {
   let { token } = req.params;
   const { email } = verifyToken(token, process.env.SIGNUP_TOKEN);
@@ -69,6 +84,14 @@ export const newConfirmEmail = async (req, res) => {
   await sendEmail(email, "confirm email", html);
   return res.status(200).send(`<p>new confirm email is sent to your email</p>`);
 };
+
+
+
+
+
+
+
+
 
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -94,6 +117,12 @@ export const sendCode = async (req, res, next) => {
   await sendEmail(email, "Forget Password Email", html);
   return res.status(200).json({ message: "Code is sent to your email"});
 };
+
+
+
+
+
+
 export const forgetPassword = async(req, res, next)=>{
   const {code, email, password} = req.body;
   const user = await userModel.findOne({ email });
