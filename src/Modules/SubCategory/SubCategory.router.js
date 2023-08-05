@@ -5,7 +5,7 @@ import { asyncHandler } from "../../Services/errorHandling.js";
 import * as validators from "./SubCategory.validation.js";
 import validation from "../../Middleware/validation.js";
 
-const router = Router({ mergeParams: true });
+const router = Router({ mergeParams: true, caseSensitive:true});
 
 router.post(
   "/addSubCategory",

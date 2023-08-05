@@ -5,7 +5,7 @@ import { asyncHandler } from '../../Services/errorHandling.js';
 import fileUpload, { fileValidation } from '../../Services/multerCloudinary.js';
 import validation from '../../Middleware/validation.js'
 import * as validators from './User.validation.js';;
-const router =Router();
+const router =Router({caseSensitive:true});
 
 router.patch('/profilePic',auth,fileUpload(fileValidation.image).single('image'),
 validation(validators.profilePic),

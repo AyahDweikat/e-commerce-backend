@@ -8,7 +8,7 @@ import SubCategoryRouter from "../SubCategory/SubCategory.router.js";
 import { auth, roles } from "../../Middleware/auth.middleware.js";
 import { endPoint } from './Category.endpoint.js';
 
-const router = Router();
+const router = Router({caseSensitive:true});
 router.use("/:categoryId/subCategory", SubCategoryRouter);
 router.post(
   "/addCategory",

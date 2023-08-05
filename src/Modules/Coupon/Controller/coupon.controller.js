@@ -3,7 +3,7 @@ export const addCoupon = async(req, res, next)=>{
     if(await couponModel.findOne({name: req.body.name})){
         return next(new Error(`Duplicate Coupon name ${req.body.name}`, {cause:409}))
     }
-    const newCoupon = await couponModel.create(req.body)
+    const newCoupon = await couponModel.create({name:req.body.name, createdBy:req.user._id, updatedBy: req.user._id})
     return res.status(201).json({message:"successfully added Coupon", newCoupon})
 }
 export const updateCoupon = async(req, res)=>{
@@ -18,8 +18,9 @@ export const updateCoupon = async(req, res)=>{
         if(coupon.amount === req.body.amount) return next(new Error(`Old amount match new amount`, {cause:409}))
         coupon.amount = req.body.amount;
     }
+    coupon.updatedBy= req.user._id 
     await coupon.save()
-    return res.json({message:"Categoryupdated successfully", coupon})
+    return res.json({message:"Category updated successfully", coupon})
 }
 export const getCouponData = async(req, res, next)=>{
     const coupon = await couponModel.findById(req.params.couponId)

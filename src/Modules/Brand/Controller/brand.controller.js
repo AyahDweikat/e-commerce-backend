@@ -7,7 +7,7 @@ export const addBrand = async(req, res, next) =>{
         return next(new Error(`Duplicate Category name ${name} `, {cause:409}))
     }
     const {public_id, secure_url} = await cloudinary.uploader.upload(req.file.path, {folder:`${process.env.APP_NAME}/brand`})
-    const newBrand = await brandModel.create({name, categoryId, image:{public_id, secure_url}, createdBy:{} })
+    const newBrand = await brandModel.create({name, categoryId, image:{public_id, secure_url}, createdBy:req.user._id, updatedBy: req.user._id  })
     return res.status(201).json({message:"successfully added Category", newBrand})
 }
 export const getBrands = async(req, res, next) =>{
@@ -48,7 +48,8 @@ export const updateBrand = async(req, res, next) =>{
     if(req.body.categoryId) {
         if(brand.categoryId === req.body.categoryId) return next(new Error(`Old name match new name`, {cause:409}))
         brand.categoryId = req.body.categoryId;
-    }  
+    }
+    brand.updatedBy= req.user._id 
     await brand.save()
     return res.json({message:"Brand updated successfully", brand})
 }

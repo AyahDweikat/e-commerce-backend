@@ -4,7 +4,7 @@ import * as validators from "./coupon.validation.js";
 import { asyncHandler } from "../../Services/errorHandling.js";
 import validation from "../../Middleware/validation.js";
 
-const router = Router();
+const router = Router({caseSensitive:true});
 
 router.post(
   "/addCoupon",

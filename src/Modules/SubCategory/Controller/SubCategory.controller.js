@@ -22,7 +22,8 @@ export const addSubCategory = asyncHandler(async (req, res, next) => {
     categoryId,
     slug: slugify(name),
     image: { public_id, secure_url },
-    createdBy: {},
+    createdBy:req.user._id, 
+    updatedBy: req.user._id 
   });
   return res
     .status(201)
@@ -56,6 +57,7 @@ export const updateSubCategory = async (req, res, next) => {
     await cloudinary.uploader.destroy(subCategory.image.public_id);
     subCategory.image = { public_id, secure_url };
   }
+  subCategory.updatedBy= req.user._id 
   await subCategory.save();
   return res.json({ message: "SubCategory updated successfully", subCategory });
 };

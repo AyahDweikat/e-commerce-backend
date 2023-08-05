@@ -14,7 +14,8 @@ const subCategorySchema = new Schema ({
         required:true,
     },
     categoryId:{type:Types.ObjectId, ref:'Category', required:true},
-    CreatedBy:{type: Types.ObjectId, ref:'User'} // required true after prototype
+    CreatedBy: { type: Types.ObjectId, ref: "User", required:true}, // required true after prototype
+    updatedBy: { type: Types.ObjectId, ref: "User", required:true}, // required true after prototype
 },
 {
     timestamps:true

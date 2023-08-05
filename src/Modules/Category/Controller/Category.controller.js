@@ -5,12 +5,12 @@ import categoryModel from './../../../../DB/model/Category.model.js';
 dotenv.config()
 
 export const addCategory = async(req, res, next)=>{
-    const {name} = req.body;
+    const name = req.body.name.toLowerCase();
     if(await categoryModel.findOne({name})){
         return next(new Error(`Duplicate Category name ${name}`, {cause:409}))
     }
     const {public_id, secure_url} = await cloudinary.uploader.upload(req.file.path, {folder:`${process.env.APP_NAME}/category`})
-    const newCategory = await categoryModel.create({name, slug:slugify(name), image:{public_id, secure_url}, createdBy:{} })
+    const newCategory = await categoryModel.create({name, slug:slugify(name), image:{public_id, secure_url}, createdBy:req.user._id, updatedBy: req.user._id })
     return res.status(201).json({message:"successfully added Category", newCategory})
 }
 export const updateCategory = async(req, res, next)=>{
@@ -27,6 +27,7 @@ export const updateCategory = async(req, res, next)=>{
         await cloudinary.uploader.destroy(category.image.public_id)
         category.image = {public_id, secure_url}
     }
+    category.updatedBy= req.user._id 
     await category.save()
     return res.json({message:"Category updated successfully", category})
 }

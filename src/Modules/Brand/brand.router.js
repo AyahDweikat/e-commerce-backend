@@ -6,7 +6,7 @@ import fileUpload, { fileValidation } from "../../Services/multerCloudinary.js";
 import { asyncHandler } from "../../Services/errorHandling.js";
 import validation from "../../Middleware/validation.js";
 
-const router = Router();
+const router = Router({caseSensitive:true});
 router.use("/:categoryId/subCategory", SubCategoryRouter);
 router.post(
   "/addBrand",

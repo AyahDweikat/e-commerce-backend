@@ -9,7 +9,8 @@ const categorySchema = new Schema({
       required: true,
     },
     image: { type: Object, required: true},
-    CreatedBy: { type: Types.ObjectId, ref: "User"}, // required true after prototype
+    CreatedBy: { type: Types.ObjectId, ref: "User", required:true}, // required true after prototype
+    updatedBy: { type: Types.ObjectId, ref: "User", required:true}, // required true after prototype
   },
   {
     toJSON: { virtuals: true },

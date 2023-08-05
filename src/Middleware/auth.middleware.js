@@ -20,10 +20,12 @@ export const auth = (accessRoles = []) => {
     }
     const user = await userModel
       .findOne({ _id: decoded.id })
-      .select("userName role");
     if (!user) return next(new Error(`Not Registered User`, { cause: 401 }));
     if (!accessRoles.includes(user.role)) {
       return next(new Error(`Not Authorized User`, { cause: 403 }));
+    }
+    if(parseInt(user?.changePasswordTime.getTime()/1000)>decoded.iat ){
+      return next(new Error(`Expired Token`, { cause: 400 }));
     }
     req.user = user;
     return next();
