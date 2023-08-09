@@ -22,8 +22,8 @@ export const addSubCategory = asyncHandler(async (req, res, next) => {
     categoryId,
     slug: slugify(name),
     image: { public_id, secure_url },
-    createdBy:req.user._id, 
-    updatedBy: req.user._id 
+    // createdBy:req.user?._id, 
+    // updatedBy: req.user?._id 
   });
   return res
     .status(201)
