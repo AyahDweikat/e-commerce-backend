@@ -7,17 +7,37 @@ import { asyncHandler } from "../../Services/errorHandling.js";
 import { auth } from "../../Middleware/auth.middleware.js";
 import { endPoint } from "./Product.endpoint.js";
 
-const router = Router({caseSensitive:true});
+const router = Router({ caseSensitive: true });
 router.post(
   "/addProduct",
   auth(endPoint.create),
   fileUpload(fileValidation.image).fields([
-    {name:"mainImage", maxCount:1},
-    {name:"subImages", maxCount:5},
-]),
+    { name: "mainImage", maxCount: 1 },
+    { name: "subImages", maxCount: 5 },
+  ]),
   // validation(validators.addProductSchema),
   asyncHandler(ProductController.addProduct)
 );
+
+
+
+router.put(
+  "/updateProduct/:productId",
+  auth(endPoint.update),
+  fileUpload(fileValidation.image).fields([
+    { name: "mainImage", maxCount: 1 },
+    { name: "subImages", maxCount: 5 },
+  ]),
+  // validation(validators.updateProductSchema),
+  asyncHandler(ProductController.updateProduct)
+);
+
+
+
+
+
+
+
 // router.get(
 //   "/getProduct/:productId",
 //   // validation(validators.getProductSchema),
@@ -25,10 +45,4 @@ router.post(
 // );
 // router.get("/getProducts/:categoryId", asyncHandler(ProductController.getProducts));
 // router.get("/getAllProducts", asyncHandler(ProductController.getAllProducts));
-// router.put(
-//   "/updateProduct/:productId",
-//   fileUpload(fileValidation.image).single("image"),
-//   validation(validators.updateProductSchema),
-//   asyncHandler(ProductController.updateProduct)
-// );
 export default router;

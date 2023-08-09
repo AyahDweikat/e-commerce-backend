@@ -14,7 +14,7 @@ const couponSchema = new Schema ({
         type:Types.ObjectId,
         ref:'User'
     },
-    CreatedBy: { type: Types.ObjectId, ref: "User", required:true}, // required true after prototype
+    createdBy: { type: Types.ObjectId, ref: "User", required:true}, // required true after prototype
     updatedBy: { type: Types.ObjectId, ref: "User", required:true}, // required true after prototype
 },
 {

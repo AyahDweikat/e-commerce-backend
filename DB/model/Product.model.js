@@ -32,6 +32,9 @@ const productSchema = new Schema(
     },
     colors: [String],
     sizes: [{ type: String, enum: ["s", "m", "lg", "xl"] }],
+    
+    
+    
     mainImage: {
       type: Object,
       required: true,
@@ -39,6 +42,8 @@ const productSchema = new Schema(
     subImages: {
       type: Object,
     },
+
+
     categoryId: {
       type: Types.ObjectId,
       ref: "Category",
