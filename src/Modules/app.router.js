@@ -8,6 +8,8 @@ import brandRouter from './Brand/brand.router.js';
 import subCategoryRouter from './SubCategory/SubCategory.router.js'
 import couponRouter from './Coupon/coupon.router.js'
 import ProductRouter from './Products/product.router.js'
+import CartRouter from './Cart/Cart.router.js'
+
 import { globalErrorHandel } from '../Services/errorHandling.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const fullPath=path.join(__dirname,'../upload');
@@ -22,6 +24,7 @@ const initApp=(app,express)=>{
     app.use("/auth", AuthRouter);
     app.use('/user', UserRouter);
     app.use('/product', ProductRouter);
+    app.use('/cart', CartRouter);
 
     app.use('/*', (req,res)=>{
         return res.json({messaga:"page not found"});
