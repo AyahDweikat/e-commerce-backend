@@ -4,5 +4,5 @@ export const endPoint = {
     create:[roles.Admin],
     update:[roles.Admin],
     delete:[roles.Admin],
-    get:[roles.Admin, roles.User],
+    get:Object.values(roles),
 }

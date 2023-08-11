@@ -8,10 +8,10 @@ import validation from "../../Middleware/validation.js";
 
 const router = Router({ caseSensitive: true });
 router.post(
-  "/addCart",
+  "/addProductToCart",
   auth(endPoint.create),
   // validation(validators.addProductSchema),
-  asyncHandler(CartController.addCart)
+  asyncHandler(CartController.addProductToCart)
 );
 
 

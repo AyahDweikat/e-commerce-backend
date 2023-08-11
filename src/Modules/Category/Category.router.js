@@ -32,7 +32,7 @@ router.get(
 );
 router.get(
   "/getAllCategories",
-  auth(endPoint.get),
+  auth(Object.values(roles)),
   asyncHandler(CategoryController.getAllCategories)
 );
 export default router;
