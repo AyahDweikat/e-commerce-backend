@@ -10,7 +10,7 @@ export const globalErrorHandel = (err, req, res, next) => {
   if (process.env.MOOD == "DEV") {
     return res
       .status(err?.cause || 500)
-      .json({ message: "catch error", error: err.stack });
+      .json({ message: "catch error", error: err });
   }
   return res.status(err?.cause || 500).json({ message: "catch error", error: err.stack });
 };

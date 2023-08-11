@@ -27,5 +27,8 @@ router.get(
   "/getAllSubCategories",
   asyncHandler(SubCategoryController.getAllSubCategories)
 );
-
+router.get(
+  "/:subCategoryId/getProducts",
+  asyncHandler(SubCategoryController.getProductsFromSubCategory)
+);
 export default router;
