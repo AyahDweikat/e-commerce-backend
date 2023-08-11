@@ -145,7 +145,7 @@ export const updateProduct = async (req, res, next) => {
     product.subImages = subImages;
   }
     product.updatedBy = req.user._id;
-    // const updatedProduct = await product.save();
-  // if(!updatedProduct) next(new Error(`Fail to update Product`, { cause: 409 }));
+    const updatedProduct = await product.save();
+    if(!updatedProduct) next(new Error(`Fail to update Product`, { cause: 409 }));
   return res.json({ message: "Product updated successfully", product });
 };
