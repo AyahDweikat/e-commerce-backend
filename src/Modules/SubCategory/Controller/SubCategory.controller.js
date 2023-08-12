@@ -83,6 +83,9 @@ export const getProductsFromSubCategory = async (req, res, next) => {
   const { subCategoryId } = req.params;
   const specificProducts = await subCategoryModel
     .findById(subCategoryId)
-    .populate("products");
+    .populate({
+      path:"products",
+      match: {isDeleted: {$eq:false}}
+  });
   res.status(200).json({message:"Products", specificProducts });
 };

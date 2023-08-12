@@ -18,9 +18,6 @@ router.post(
   // validation(validators.addProductSchema),
   asyncHandler(ProductController.addProduct)
 );
-
-
-
 router.put(
   "/updateProduct/:productId",
   auth(endPoint.update),
@@ -31,18 +28,36 @@ router.put(
   // validation(validators.updateProductSchema),
   asyncHandler(ProductController.updateProduct)
 );
+router.patch(
+  "/softDeleteProduct/:productId",
+  auth(endPoint.softDelete),
+  // validation(validators.updateProductSchema),
+  asyncHandler(ProductController.softDeleteProduct)
+);
+router.patch(
+  "/restoreDeletedProduct/:productId",
+  auth(endPoint.softDelete),
+  // validation(validators.updateProductSchema),
+  asyncHandler(ProductController.restoreDeletedProduct)
+);
+router.delete(
+  "/forceDeleteProduct/:productId",
+  auth(endPoint.delete),
+  // validation(validators.updateProductSchema),
+  asyncHandler(ProductController.forceDeleteProduct)
+);
 
+router.get(
+  "/getProductInfo/:productId",
+  // validation(validators.getProductSchema),
+  asyncHandler(ProductController.getProductInfo)
+);
 
-
-
-
-
-
-// router.get(
-//   "/getProduct/:productId",
-//   // validation(validators.getProductSchema),
-//   asyncHandler(ProductController.getProduct)
-// );
+router.get(
+  "/getSoftDeletedProducts",
+  // validation(validators.getProductSchema),
+  asyncHandler(ProductController.getSoftDeletedProducts)
+);
 // router.get("/getProducts/:categoryId", asyncHandler(ProductController.getProducts));
-// router.get("/getAllProducts", asyncHandler(ProductController.getAllProducts));
+router.get("/getAllProducts", asyncHandler(ProductController.getAllProducts));
 export default router;
