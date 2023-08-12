@@ -1,4 +1,3 @@
-
 import mongoose, {Schema,Types,model} from 'mongoose';
 const brandSchema = new Schema ({
     name:{
@@ -14,8 +13,8 @@ const brandSchema = new Schema ({
         ref:'Category',
         required:true,
     },
-    createdBy: { type: Types.ObjectId, ref: "User", required:true}, // required true after prototype
-    updatedBy: { type: Types.ObjectId, ref: "User", required:true}, // required true after prototype
+    createdBy: { type: Types.ObjectId, ref: "User", required:true},
+    updatedBy: { type: Types.ObjectId, ref: "User", required:true},
 },
 {
     timestamps:true,

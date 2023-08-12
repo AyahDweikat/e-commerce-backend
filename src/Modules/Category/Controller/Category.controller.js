@@ -13,6 +13,19 @@ export const addCategory = async(req, res, next)=>{
     const newCategory = await categoryModel.create({name, slug:slugify(name), image:{public_id, secure_url}, createdBy:req.user._id, updatedBy: req.user._id })
     return res.status(201).json({message:"successfully added Category", newCategory})
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const updateCategory = async(req, res, next)=>{
     const category = await categoryModel.findById(req.params.categoryId)
     if(!category) return next(new Error(`Invalid Category Id`, {cause:400}))

@@ -43,21 +43,21 @@ export const addProduct = async (req, res, next) => {
     .json({ message: "successfully added Product", newProduct });
 };
 
-// export const getProduct = async(req, res, next) =>{
-//     const {productId} = req.params;
-//     const brands = await brandModel.find({categoryId})
-//     res.json({test:"Getting brands successfully", brands})
-// }
 
-// export const getProducts = async (req, res, next) => {
-//   const { categoryId } = req.params;
-//   const brands = await brandModel.find({ categoryId });
-//   res.json({ test: "Getting brands successfully", brands });
-// };
-// export const getAllProducts = async (req, res, next) => {
-//   const brands = await brandModel.find();
-//   res.json({ test: "Getting All brands successfully", brands });
-// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const updateProduct = async (req, res, next) => {
   const { productId } = req.params;
@@ -148,6 +148,29 @@ export const updateProduct = async (req, res, next) => {
     if(!updatedProduct) next(new Error(`Fail to update Product`, { cause: 409 }));
   return res.json({ message: "Product updated successfully", product });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const softDeleteProduct = async (req, res, next) => {
   const {productId} = req.params;
   const product = await productModel.findOneAndUpdate({_id: productId, isDeleted:false}, {isDeleted:true}, {new:true})
@@ -166,6 +189,16 @@ export const forceDeleteProduct = async (req, res, next) => {
   return res.json({message: "Success Delete for Product", product})
 }
 
+
+
+
+
+
+
+
+
+
+
 export const restoreDeletedProduct = async (req, res, next) => {
   const {productId} = req.params;
   const product = await productModel.findOneAndUpdate({_id: productId, isDeleted:true}, {isDeleted:false}, {new:true})
@@ -181,8 +214,6 @@ export const getSoftDeletedProducts = async (req, res, next) => {
   }
   return res.json({message: "Success to get Soft Deleted Product", products})
 }
-
-
 export const getProductInfo = async (req, res, next) => {
   const {productId} = req.params;
   const product = await productModel.findOne({_id: productId})

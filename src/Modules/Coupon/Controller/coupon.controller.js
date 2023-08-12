@@ -22,6 +22,12 @@ export const updateCoupon = async(req, res)=>{
     await coupon.save()
     return res.json({message:"Category updated successfully", coupon})
 }
+
+
+
+
+
+
 export const getCouponData = async(req, res, next)=>{
     const coupon = await couponModel.findById(req.params.couponId)
     if(!coupon) return next(new Error(`Invalid Coupon Id`, {cause:400}))

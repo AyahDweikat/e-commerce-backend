@@ -28,6 +28,8 @@ router.put(
   // validation(validators.updateProductSchema),
   asyncHandler(ProductController.updateProduct)
 );
+
+
 router.patch(
   "/softDeleteProduct/:productId",
   auth(endPoint.softDelete),

@@ -14,19 +14,4 @@ router.post(
   asyncHandler(CartController.addProductToCart)
 );
 
-
-
-// router.put(
-//   "/updateCart/:cartId",
-//   auth(endPoint.update),
-//   // validation(validators.updateProductSchema),
-//   asyncHandler(CartController.updateCart)
-// );
-
-
-
-
-
-
-
 export default router;

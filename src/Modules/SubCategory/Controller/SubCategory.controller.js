@@ -31,6 +31,11 @@ export const addSubCategory = asyncHandler(async (req, res, next) => {
     .json({ message: "successfully added SubCategory", newSubCategory });
 });
 
+
+
+
+
+
 export const updateSubCategory = async (req, res, next) => {
   const { categoryId, subCategoryId } = req.params;
   const subCategory = await subCategoryModel.findOne({
@@ -59,6 +64,9 @@ export const updateSubCategory = async (req, res, next) => {
   await subCategory.save();
   return res.json({ message: "SubCategory updated successfully", subCategory });
 };
+
+
+
 
 export const getSubCategory = async (req, res, next) => {
   const { categoryId } = req.params;

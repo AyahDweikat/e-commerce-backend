@@ -4,9 +4,7 @@ import * as SubCategoryController from "./Controller/SubCategory.controller.js";
 import { asyncHandler } from "../../Services/errorHandling.js";
 import * as validators from "./SubCategory.validation.js";
 import validation from "../../Middleware/validation.js";
-
 const router = Router({ mergeParams: true, caseSensitive:true});
-
 router.post(
   "/addSubCategory",
   fileUpload(fileValidation.image).single("image"),
