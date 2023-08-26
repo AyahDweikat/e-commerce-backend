@@ -9,6 +9,7 @@ import subCategoryRouter from './SubCategory/SubCategory.router.js'
 import couponRouter from './Coupon/coupon.router.js'
 import ProductRouter from './Products/product.router.js'
 import CartRouter from './Cart/Cart.router.js'
+import OrderRouter from './Order/order.router.js'
 
 import { globalErrorHandel } from '../Services/errorHandling.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -25,6 +26,8 @@ const initApp=(app,express)=>{
     app.use('/user', UserRouter);
     app.use('/product', ProductRouter);
     app.use('/cart', CartRouter);
+    app.use('/order', OrderRouter);
+
 
     app.use('/*', (req,res)=>{
         return res.json({messaga:"page not found"});

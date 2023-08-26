@@ -3,11 +3,14 @@ import * as CouponController from "./Controller/coupon.controller.js";
 import * as validators from "./coupon.validation.js";
 import { asyncHandler } from "../../Services/errorHandling.js";
 import validation from "../../Middleware/validation.js";
+import { endPoint } from "./coupon.endpoint.js";
+import { auth } from "../../Middleware/auth.middleware.js";
 
 const router = Router({caseSensitive:true});
 
 router.post(
   "/addCoupon",
+  auth(endPoint.create),
   validation(validators.addCouponSchema),
   asyncHandler(CouponController.addCoupon)
 );

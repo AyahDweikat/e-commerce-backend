@@ -9,11 +9,11 @@ const couponSchema = new Schema ({
         type : Number,
         default:1,
     },
-    expireData: Date,// after prototype
-    usedBy: {
+    expireDate: {type: String, required:true},
+    usedBy: [{
         type:Types.ObjectId,
         ref:'User'
-    },
+    }],
     createdBy: { type: Types.ObjectId, ref: "User", required:true}, // required true after prototype
     updatedBy: { type: Types.ObjectId, ref: "User", required:true}, // required true after prototype
 },
