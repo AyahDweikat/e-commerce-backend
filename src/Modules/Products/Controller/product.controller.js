@@ -5,6 +5,7 @@ import productModel from "./../../../../DB/model/Product.model.js";
 import * as dotenv from "dotenv";
 import categoryModel from "./../../../../DB/model/Category.model.js";
 import slugify from "slugify";
+import { pagination } from "../../../Services/pagination.js";
 
 export const addProduct = async (req, res, next) => {
   const { name, price, discount, categoryId, subCategoryId, brandId } =
@@ -42,23 +43,6 @@ export const addProduct = async (req, res, next) => {
     .status(201)
     .json({ message: "successfully added Product", newProduct });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const updateProduct = async (req, res, next) => {
   const { productId } = req.params;
   const product = await productModel.findOne({ _id: productId });
@@ -148,29 +132,6 @@ export const updateProduct = async (req, res, next) => {
     if(!updatedProduct) next(new Error(`Fail to update Product`, { cause: 409 }));
   return res.json({ message: "Product updated successfully", product });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const softDeleteProduct = async (req, res, next) => {
   const {productId} = req.params;
   const product = await productModel.findOneAndUpdate({_id: productId, isDeleted:false}, {isDeleted:true}, {new:true})
@@ -179,7 +140,6 @@ export const softDeleteProduct = async (req, res, next) => {
   }
   return res.json({message: "Success Soft Delete For Product", product})
 }
-
 export const forceDeleteProduct = async (req, res, next) => {
   const {productId} = req.params;
   const product = await productModel.findOneAndDelete({_id: productId, isDeleted:true})
@@ -188,17 +148,6 @@ export const forceDeleteProduct = async (req, res, next) => {
   }
   return res.json({message: "Success Delete for Product", product})
 }
-
-
-
-
-
-
-
-
-
-
-
 export const restoreDeletedProduct = async (req, res, next) => {
   const {productId} = req.params;
   const product = await productModel.findOneAndUpdate({_id: productId, isDeleted:true}, {isDeleted:false}, {new:true})
@@ -216,15 +165,21 @@ export const getSoftDeletedProducts = async (req, res, next) => {
 }
 export const getProductInfo = async (req, res, next) => {
   const {productId} = req.params;
-  const product = await productModel.findOne({_id: productId})
+  const product = await productModel.findOne({_id: productId}).populate('reviews')
   if(!product){
-    return next(new Error(`Error to get Soft Deleted Products`, { cause: 409 }));
+    return next(new Error(`Error to get Product`, { cause: 409 }));
   }
   return res.json({message: "Success to get Product", product})
 }
 
+
+
+
+
 export const getAllProducts = async (req, res, next) => {
-  const allProducts = await productModel.find()
+  let {page, size} = req.query;
+  const {skip, limit} = pagination(page, size)
+  const allProducts = await productModel.find().limit(limit).skip(skip)
   if(!allProducts){
     return next(new Error(`Error to get All Products`, { cause: 409 }));
   }

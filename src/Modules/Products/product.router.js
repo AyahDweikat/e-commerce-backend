@@ -6,8 +6,13 @@ import validation from "../../Middleware/validation.js";
 import { asyncHandler } from "../../Services/errorHandling.js";
 import { auth } from "../../Middleware/auth.middleware.js";
 import { endPoint } from "./Product.endpoint.js";
+import reviewRouter from '../Review/review.router.js';
 
-const router = Router({ caseSensitive: true });
+
+const router = Router({ caseSensitive: true, mergeParams: true, });
+
+
+router.use('/:productId/review', reviewRouter)
 router.post(
   "/addProduct",
   auth(endPoint.create),

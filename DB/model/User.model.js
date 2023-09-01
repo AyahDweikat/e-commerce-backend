@@ -1,5 +1,5 @@
 
-import mongoose, {Schema,model} from 'mongoose';
+import mongoose, {Schema,Types,model} from 'mongoose';
 const userSchema = new Schema ({
     userName:{
         type:String,
@@ -49,7 +49,11 @@ const userSchema = new Schema ({
     },
     changePasswordTime:{
         type:Date,
-    }
+    }, 
+    wishList:[{
+        type: Types.ObjectId, 
+        ref: "Product",
+    }]
 },
 {
     timestamps:true,
