@@ -37,6 +37,7 @@ const initApp = (app, express) => {
   app.use("/cart", CartRouter);
   app.use("/order", OrderRouter);
 
+  
   app.use("/*", (req, res) => {
     return res.json({ messaga: "page not found" });
   });
