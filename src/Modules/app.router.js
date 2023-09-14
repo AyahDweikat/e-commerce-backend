@@ -37,11 +37,11 @@ const initApp = (app, express) => {
   app.use("/cart", CartRouter);
   app.use("/order", OrderRouter);
 
-  
+
   app.use("/*", (req, res) => {
     return res.json({ messaga: "page not found" });
   });
   //global error handler
-  // app.use(globalErrorHandel);
+  app.use(globalErrorHandel);
 };
 export default initApp;
