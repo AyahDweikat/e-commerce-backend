@@ -23,6 +23,7 @@ router.get(
 
 router.put(
   "/updateCoupon/:couponId",
+  auth(endPoint.update),
   validation(validators.updateCouponSchema),
   asyncHandler(CouponController.updateCoupon)
 );

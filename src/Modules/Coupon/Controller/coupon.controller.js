@@ -22,7 +22,7 @@ export const addCoupon = async(req, res, next)=>{
 
 
 
-export const updateCoupon = async(req, res)=>{
+export const updateCoupon = async(req, res, next)=>{
     const coupon = await couponModel.findById(req.params.couponId)
     if(!coupon) return next(new Error(`Invalid Coupon Id`, {cause:400}))
     if(req.body.name) {
