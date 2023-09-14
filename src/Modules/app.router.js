@@ -30,9 +30,9 @@ const initApp = (app, express) => {
   app.use("/subCategory", subCategoryRouter);
   app.use("/coupon", couponRouter);
   app.use("/brand", brandRouter);
-  // app.use("/upload", express.static(fullPath));
-  // app.use("/auth", AuthRouter);
-  // app.use("/user", UserRouter);
+  app.use("/upload", express.static(fullPath));
+  app.use("/auth", AuthRouter);
+  app.use("/user", UserRouter);
   app.use("/product", ProductRouter);
   app.use("/cart", CartRouter);
   app.use("/order", OrderRouter);
@@ -41,6 +41,6 @@ const initApp = (app, express) => {
     return res.json({ messaga: "page not found" });
   });
   //global error handler
-  app.use(globalErrorHandel);
+  // app.use(globalErrorHandel);
 };
 export default initApp;
