@@ -104,7 +104,7 @@ export const updateProduct = async (req, res, next) => {
     product.discount = discount
     product.finalPrice = product.price * (1 - discount)
   }
-  if(req.files.mainImage.length){
+  if(req.files?.mainImage?.length){
     const { public_id, secure_url } = await cloudinary.uploader.upload(
       req.files.mainImage[0].path,
       { folder: `${process.env.APP_NAME}/product/mainImage` }
@@ -113,7 +113,7 @@ export const updateProduct = async (req, res, next) => {
     product.mainImage.secure_url = secure_url;
     product.mainImage.public_id = public_id;
   }
-  if(req.files.subImages.length){
+  if(req.files?.subImages?.length){
     const subImages = [];
     for (const file of product.subImages) {
     await cloudinary.uploader.destroy(file.public_id);
