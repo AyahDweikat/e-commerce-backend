@@ -52,4 +52,4 @@ export const updateBrand = async(req, res, next) =>{
     brand.updatedBy= req.user._id 
     await brand.save()
     return res.json({message:"Brand updated successfully", brand})
-}
+} 

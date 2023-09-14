@@ -26,13 +26,13 @@ const initApp = (app, express) => {
   app.use(cors());
   connectDB();
   app.use(express.json());
-  app.use("/category", CategoryRouter);
-  app.use("/subCategory", subCategoryRouter);
-  app.use("/coupon", couponRouter);
+  app.use("/category", CategoryRouter);//
+  app.use("/subCategory", subCategoryRouter);//
+  app.use("/coupon", couponRouter);//
   app.use("/brand", brandRouter);
-  app.use("/upload", express.static(fullPath));
-  app.use("/auth", AuthRouter);
-  app.use("/user", UserRouter);
+  // app.use("/upload", express.static(fullPath));
+  app.use("/auth", AuthRouter);//
+  app.use("/user", UserRouter);//
   app.use("/product", ProductRouter);
   app.use("/cart", CartRouter);
   app.use("/order", OrderRouter);
