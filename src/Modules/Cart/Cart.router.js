@@ -13,5 +13,21 @@ router.post(
   // validation(validators.addProductSchema),
   asyncHandler(CartController.addProductToCart)
 );
+router.get(
+  "/getCart",
+  auth(endPoint.get),
+  asyncHandler(CartController.getCart)
+);
 
+
+router.patch(
+  "/clearCart",
+  auth(endPoint.update),
+  asyncHandler(CartController.clearCart)
+);
+router.patch(
+  "/deleteItemFromCart/",
+  auth(endPoint.update),
+  asyncHandler(CartController.deleteItemFromCart)
+);
 export default router;

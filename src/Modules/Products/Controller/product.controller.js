@@ -179,7 +179,28 @@ export const getProductInfo = async (req, res, next) => {
 export const getAllProducts = async (req, res, next) => {
   let {page, size} = req.query;
   const {skip, limit} = pagination(page, size)
-  const allProducts = await productModel.find().limit(limit).skip(skip)
+  const excQueryParams = ['page', 'size', 'sort', 'search']
+  const filterQuery = {...req.query};
+  excQueryParams.filter((params)=>{
+    delete filterQuery[params]
+  })
+  console.log(filterQuery)
+  const query = JSON.parse(JSON.stringify(filterQuery).replace(/(gt|lt|gte|lte|in|nin|neq)/g, match=> `$${match}`))
+  
+  
+  
+  
+  const mongoQuery = productModel.find(query).limit(limit).skip(skip)
+  .sort(req.query?.sort?.replaceAll(',', ' '))
+
+  let allProducts = req.query.search ? await mongoQuery.find({
+      $or:[
+        {name: {$regex: req.query?.search, $options:'i'}},
+        {description: {$regex: req.query?.search, $options:'i'}}
+      ]
+    })
+    : await mongoQuery;
+    
   if(!allProducts){
     return next(new Error(`Error to get All Products`, { cause: 409 }));
   }
