@@ -18,11 +18,11 @@ function generateHeader(doc) {
     .image("logo.png", 50, 45, { width: 50 })
     .fillColor("#444444")
     .fontSize(20)
-    .text("ACME Inc.", 110, 57)
+    .text("E-commerce", 110, 57)
     .fontSize(10)
-    .text("ACME Inc.", 200, 50, { align: "right" })
-    .text("123 Main Street", 200, 65, { align: "right" })
-    .text("New York, NY, 10025", 200, 80, { align: "right" })
+    .text("E-commerce", 200, 50, { align: "right" })
+    .text("Nablus", 200, 65, { align: "right" })
+    .text("Palestine, Nablus, 10025", 200, 80, { align: "right" })
     .moveDown();
 }
 
@@ -38,7 +38,7 @@ function generateCustomerInformation(doc, invoice) {
 
   doc
     .fontSize(10)
-    .text("Invoice Number:", 50, customerInformationTop)
+    .text("Company Number:", 50, customerInformationTop)
     .font("Helvetica-Bold")
     .text(invoice.invoice_nr, 150, customerInformationTop)
     .font("Helvetica")
@@ -177,7 +177,7 @@ function generateHr(doc, y) {
 }
 
 function formatCurrency(cents) {
-  return "$" + (cents / 100).toFixed(2);
+  return "$" + (cents).toFixed(2);
 }
 
 function formatDate(date) {

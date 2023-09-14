@@ -3,6 +3,7 @@ import couponModel from './../../../../DB/model/Coupon.model.js';
 import productModel from './../../../../DB/model/Product.model.js';
 import orderModel from '../../../../DB/model/Order.model.js';
 import cartModel from '../../../../DB/model/Cart.model.js';
+import { createInvoiceFromOrder } from '../../../Services/orderInvoice.js';
 export const addOrder = async(req, res, next)=>{
     const {products, address, phoneNumber, couponName, paymentType} = req.body
     if(couponName){
@@ -33,6 +34,8 @@ export const addOrder = async(req, res, next)=>{
         if(!checkProduct){
           continue;
         }
+        product.name = checkProduct.name;
+        product.description = checkProduct.description;
         product.unitPrice = checkProduct.finalPrice;
         product.finalPrice = checkProduct.finalPrice * product.qty;
         subTotal += product.finalPrice;
@@ -51,6 +54,7 @@ export const addOrder = async(req, res, next)=>{
         finalPrice: subTotal * (1 - ((req.body.coupon?.amount |0)/100)),
         status: (paymentType =='card')? 'approved':'pending'
     })
+    createInvoiceFromOrder(order, req.user)
     for(let product of finalProductList){
         await productModel.findOneAndUpdate({_id:product.productId}, {$inc:{stock:-product.qty}})
     }

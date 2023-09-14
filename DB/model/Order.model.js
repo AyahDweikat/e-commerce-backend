@@ -8,6 +8,9 @@ const orderSchema = new Schema(
         qty: { type: Number, default: 1, required: true },
         unitPrice: { type: Number, required: true },
         finalPrice: { type: Number, required: true },
+        name: { type: String, required: true },
+        description: { type: String, required: true },
+
       },
     ],
     address: {
